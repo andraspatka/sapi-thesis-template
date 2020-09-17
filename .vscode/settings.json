@@ -1,0 +1,31 @@
+{
+    "workbench.iconTheme": "material-icon-theme",
+    "latex-workshop.latex.autoBuild.run": "never",
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "pdflatex ➞ bibtex ➞ pdflatex × 2",
+            "tools": [
+                "pdflatex",
+                "bibtex",
+                "pdflatex",
+                "pdflatex"
+            ]
+		}
+    ],
+    "git.enableSmartCommit": true,
+    "spellright.language": [
+        "en_US",
+        "hu_HU",
+        "ro_RO"
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "plaintext",
+        "latex"
+    ],
+    "cSpell.words": [
+        "kiértékelődik",
+        "optimizált"
+    ]
+}
+

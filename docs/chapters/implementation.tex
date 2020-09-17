@@ -1,0 +1,34 @@
+\section{Ágensek vezérlése}
+
+\textbf{Hivatkozásra példa}
+
+Az ágensek vezérléséhez a potenciálmező navigációs módszer volt felhasználva. Ez egy bevált módszer a robotrajok vezérléséhez \cite{szanto2015investigation}. Az alapötlete, hogy az akadályok taszító erővel hatnak az ágensre és a cél vonzó erővel. Ennek a két erőnek az eredője határozza meg az irányt amerre érdemes haladni.
+
+\subsection{Potenciálmező navigáció}
+
+\textbf{Egyenletekre példa}
+
+A potenciálmező navigációs módszernél az erők nagysága az \eqref{eq:poti} egyenlet szerint van kiszámolva.
+
+\begin{equation}
+    \left\{
+    \begin{array}{l}
+        |\vec{f}_{push}| = a e ^ {- \frac{(x - b_{push}) ^ {2}}{2 c_{push}^2 }} \\
+        |\vec{f}_{pull}| = a e ^ {- \frac{(x - b_{pull}) ^ {2}}{2 c_{pull}^2 }} \\
+    \end{array}
+    \right.
+    \label{eq:poti}
+\end{equation}
+
+\begin{itemize}
+    \item a: Gauss görbe magassága
+    \item b: Gauss görbe középpontja
+    \item c: Gauss görbe szélessége
+\end{itemize}
+
+\begin{equation}
+    \vec{f}_{robot} = \sum_{i} \vec{f}_{push_{i}} + \sum_{i} \vec{f}_{pull_{i}}
+    \label{eq:poti_eredo}
+\end{equation}
+
+Az eredő vektor a \eqref{eq:poti_eredo} képlet szerint volt kiszámolva. 

@@ -1,0 +1,19 @@
+\begin{algorithm}[h]
+    \begin{small}
+    \KwData{Tanulási tényező ($\alpha \in (0, 1])$), $\epsilon > 0$}
+    Véletlenszerű érték minden $Q_{1}(s,a)$ és $Q_{2}(s,a)$-nek, kivéve $Q($terminális$, \cdot ) = 0$, $s \in S$, $a \in A$ \;
+    \For{minden epizód}{
+        S inicalizálása\;
+        \Repeat{S terminális állapot}{
+        $A \leftarrow$ cselekvés, $S$ állapotban $\epsilon$-greedy szerint $Q_{1}+Q_{2}$ \;
+        $A$ cselekedet végrehajtása, R és S' megfigyelése\;
+        \eIf{ $50\%$ eséllyel}
+            {$Q_{1}(S, A) \leftarrow Q_{1}(S, A) + \alpha [R + \gamma Q_{2}(S', arg\max_{a}Q_{1}(S', a)) - Q_{1}(S, A)]$}
+            {$Q_{2}(S, A) \leftarrow Q_{2}(S, A) + \alpha [R + \gamma Q_{1}(S', arg\max_{a}Q_{2}(S', a)) - Q_{2}(S, A)]$}
+        $S \leftarrow S'$\;
+        }
+    }
+    \end{small}
+    \caption{Dupla Q-tanulás \cite{sutton2018reinforcement}.}        
+    \label{algo:double_q}
+\end{algorithm}

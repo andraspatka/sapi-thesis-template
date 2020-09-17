@@ -1,0 +1,43 @@
+name: Compile thesis
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-16.04
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install texlive extra
+      run: | 
+        sudo apt-get install texlive-latex-extra
+    - name: Install packages for babel magyar
+      run: |
+        sudo apt-get install texlive-lang-european
+    - name: Install texlive science
+      run: |
+        sudo apt-get install texlive-science
+    - name: Compile the thesis
+      run: |
+        cd $GITHUB_WORKSPACE/docs
+        pdflatex main.tex
+        bibtex main
+        pdflatex main.tex
+        pdflatex main.tex
+    - name: Compress pdf
+      run: |
+        cd $GITHUB_WORKSPACE/docs
+        ghostscript -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/printer -dNOPAUSE -dQUIET -dBATCH \
+        -sOutputFile=Template_thesis_compressed.pdf main.pdf
+    - name: Git setup
+      run: |
+        git config user.email ${{ secrets.EMAIL }}
+        git config user.name ${{ secrets.FULL_NAME }}
+    - name: Push the document to the repo
+      run: |
+        cd $GITHUB_WORKSPACE/docs
+        branchName=$(git branch | grep '*' | tr -d '* ')
+        git add main.pdf
+        git add Template_thesis_compressed.pdf
+        git commit -m "Github Action: Compilation successful, added updated thesis main.pdf"
+        git push origin ${branchName}
